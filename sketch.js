@@ -1,3 +1,5 @@
+let changeCamera = true;
+
 let x = 1;
 let y = 0;
 let z = 0;
@@ -36,6 +38,14 @@ function changeBeta() {
 	points.length = 0;
 }
 
+function mousePressed() {
+	changeCamera = true;
+}
+
+function mouseReleased() {
+	changeCamera = false;
+}
+
 function setup() {
 	createCanvas(850, 600, WEBGL);
 	colorMode(HSB);
@@ -60,15 +70,22 @@ function draw() {
 	points.push(new p5.Vector(model.x, model.y, model.z));
 
 	translate(0, 0, -80);
-	let camX = map(mouseX, 0, width, -200, 200);
-	let camY = map(mouseY, 0, height, -200,200); 
-	camera(camX, camY, (height/2.0) / tan(PI*30.0 / 180.0), 0, 0, 0, 0, 1, 0);
-	
+
+	if (changeCamera) {
+		let camX = map(mouseX, 0, width,  -200, 200);
+		let camY = map(mouseY, 0, height, -200, 200); 
+		camera(camX, camY, (height / 2) / tan(PI / 6), 0, 0, 0, 0, 1, 0);
+	}
+
 	scale(5);
 	stroke(255);
 	noFill();
 
 	for (let v of points) {
 		point(v.x, v.y, v.z);
+	}
+
+	if (points.length >= 5000) {
+		points.shift();
 	}
 }
