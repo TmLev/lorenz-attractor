@@ -37,7 +37,7 @@ function changeBeta() {
 }
 
 function setup() {
-    createCanvas(windowWidth, 600, WEBGL);
+    createCanvas(windowWidth - 1, 600, WEBGL);
     colorMode(HSB);
 
     model = new LorenzAttractor(x, y, z, dt, sigma, rho, beta);
