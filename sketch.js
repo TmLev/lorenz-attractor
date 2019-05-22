@@ -2,7 +2,7 @@ let x = 1;
 let y = 0;
 let z = 0;
 
-let dt = 0.001;
+let dt = 0.005;
 
 let sliderDt;
 
@@ -37,7 +37,7 @@ function changeBeta() {
 }
 
 function setup() {
-    createCanvas(300, 300, WEBGL);
+    createCanvas(windowWidth, 600, WEBGL);
     colorMode(HSB);
 
     model = new LorenzAttractor(x, y, z, dt, sigma, rho, beta);
@@ -54,7 +54,7 @@ function setup() {
 function draw() {
     background(0);
     orbitControl();
-    scale(3);
+    scale(5);
 
     model.update();
     points.push(new p5.Vector(model.x, model.y, model.z));
