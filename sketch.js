@@ -81,9 +81,11 @@ function draw() {
     stroke(255);
     noFill();
 
+    beginShape();
     for (let v of points) {
-        point(v.x, v.y, v.z);
+        vertex(v.x, v.y, v.z);
     }
+    endShape();
 
     if (points.length >= 5000) {
         points.shift();
