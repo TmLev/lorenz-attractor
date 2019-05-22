@@ -21,71 +21,71 @@ let model;
 let points = new Array();
 
 function changeSigma() {
-	model.sigma = sliderSigma.value();
-	model.resetCoordinates(x, y, z);
-	points.length = 0;
+    model.sigma = sliderSigma.value();
+    model.resetCoordinates(x, y, z);
+    points.length = 0;
 }
 
 function changeRho() {
-	model.rho = sliderRho.value();
-	model.resetCoordinates(x, y, z);
-	points.length = 0;
+    model.rho = sliderRho.value();
+    model.resetCoordinates(x, y, z);
+    points.length = 0;
 }
 
 function changeBeta() {
-	model.beta = sliderBeta.value();
-	model.resetCoordinates(x, y, z);
-	points.length = 0;
+    model.beta = sliderBeta.value();
+    model.resetCoordinates(x, y, z);
+    points.length = 0;
 }
 
 function mousePressed() {
-	changeCamera = true;
+    changeCamera = true;
 }
 
 function mouseReleased() {
-	changeCamera = false;
+    changeCamera = false;
 }
 
 function setup() {
-	createCanvas(850, 600, WEBGL);
-	colorMode(HSB);
+    createCanvas(850, 600, WEBGL);
+    colorMode(HSB);
 
-	model = new LorenzAttractor(x, y, z, dt, sigma, rho, beta);
+    model = new LorenzAttractor(x, y, z, dt, sigma, rho, beta);
 
-	sliderSigma = createSlider(0, 20,  10,    0.001);
-	sliderRho   = createSlider(0, 100, 28,    0.001);
-	sliderBeta  = createSlider(0, 20,  8 / 3, 0.001);
+    sliderSigma = createSlider(0, 20,  10,    0.001);
+    sliderRho   = createSlider(0, 100, 28,    0.001);
+    sliderBeta  = createSlider(0, 20,  8 / 3, 0.001);
 
-	sliderSigma.input(changeSigma);
-	sliderRho.input(changeRho);
-	sliderBeta.input(changeBeta);
+    sliderSigma.input(changeSigma);
+    sliderRho.input(changeRho);
+    sliderBeta.input(changeBeta);
 }
 
 function draw() {
-	background(0);
+    background(0);
 
-	print(model.x, model.y, model.z);
-	model.update();
+    print(model.x, model.y, model.z);
+    model.update();
 
-	points.push(new p5.Vector(model.x, model.y, model.z));
+    points.push(new p5.Vector(model.x, model.y, model.z));
 
-	translate(0, 0, -80);
+    translate(0, 0, -80);
 
-	if (changeCamera) {
-		let camX = map(mouseX, 0, width,  -200, 200);
-		let camY = map(mouseY, 0, height, -200, 200); 
-		camera(camX, camY, (height / 2) / tan(PI / 6), 0, 0, 0, 0, 1, 0);
-	}
+    if (changeCamera) {
+        let camX = map(mouseX, 0, width,  -200, 200);
+        let camY = map(mouseY, 0, height, -200, 200); 
+        camera(camX, camY, (height / 2) / tan(PI / 6), 0, 0, 0, 0, 1, 0);
+    }
 
-	scale(5);
-	stroke(255);
-	noFill();
+    scale(5);
+    stroke(255);
+    noFill();
 
-	for (let v of points) {
-		point(v.x, v.y, v.z);
-	}
+    for (let v of points) {
+        point(v.x, v.y, v.z);
+    }
 
-	if (points.length >= 5000) {
-		points.shift();
-	}
+    if (points.length >= 5000) {
+        points.shift();
+    }
 }
