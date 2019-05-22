@@ -1,5 +1,3 @@
-let changeCamera = true;
-
 let x = 1;
 let y = 0;
 let z = 0;
@@ -38,14 +36,6 @@ function changeBeta() {
     points.length = 0;
 }
 
-function mousePressed() {
-    changeCamera = true;
-}
-
-function mouseReleased() {
-    changeCamera = false;
-}
-
 function setup() {
     createCanvas(850, 600, WEBGL);
     colorMode(HSB);
@@ -64,20 +54,12 @@ function setup() {
 function draw() {
     background(0);
 
-    print(model.x, model.y, model.z);
     model.update();
 
     points.push(new p5.Vector(model.x, model.y, model.z));
 
-    translate(0, 0, -80);
+    orbitControl();
 
-    if (changeCamera) {
-        let camX = map(mouseX, 0, width,  -200, 200);
-        let camY = map(mouseY, 0, height, -200, 200); 
-        camera(camX, camY, (height / 2) / tan(PI / 6), 0, 0, 0, 0, 1, 0);
-    }
-
-    scale(5);
     stroke(255);
     noFill();
 
