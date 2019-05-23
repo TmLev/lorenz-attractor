@@ -1,0 +1,206 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ReactionDiffusion_Webgl2</title>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js"></script>
+
+  <!-- <script src="../../p5.easycam.js"></script> -->
+  <script src="../../dwgl.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  
+<script id="webgl2.fs_grayscott" type="x-shader/x-fragment">
+  #version 300 es
+
+  #ifdef GL_ES
+    precision highp float;
+    precision mediump int;
+  #endif
+
+  #define FRAG_CLAMP 1
+
+  out vec2 outfrag;
+
+  uniform vec2 wh_rcp;
+  uniform sampler2D tex;
+
+  uniform float dA  ;
+  uniform float dB  ;
+  uniform float feed;
+  uniform float kill;
+  uniform float dt  ;
+
+  void main () {
+
+    vec2 posn = gl_FragCoord.xy * wh_rcp;
+    vec2 val = texture(tex, posn).rg;  
+    vec2 lap = -val;
+    
+    lap += textureOffset(tex, posn, ivec2(-1, 0)).rg * 0.20;
+    lap += textureOffset(tex, posn, ivec2(+1, 0)).rg * 0.20;
+    lap += textureOffset(tex, posn, ivec2( 0,-1)).rg * 0.20;
+    lap += textureOffset(tex, posn, ivec2( 0,+1)).rg * 0.20;
+    lap += textureOffset(tex, posn, ivec2(-1,-1)).rg * 0.05;
+    lap += textureOffset(tex, posn, ivec2(+1,-1)).rg * 0.05;
+    lap += textureOffset(tex, posn, ivec2(-1,+1)).rg * 0.05;
+    lap += textureOffset(tex, posn, ivec2(+1,+1)).rg * 0.05;
+    
+    float nA = dA * lap.r - val.r * val.g * val.g + feed * (1.0 - val.r);
+    float nB = dB * lap.g + val.r * val.g * val.g - (feed + kill) * val.g;
+    
+    outfrag = val + vec2(nA, nB) * dt;
+    
+  #if FRAG_CLAMP
+    outfrag = clamp(outfrag, vec2(0.0), vec2(1.0));
+  #endif
+  }
+</script>
+
+
+
+<script id="webgl1.fs_grayscott" type="x-shader/x-fragment">
+  #version 100
+
+  #ifdef GL_ES
+    precision highp float;
+    precision mediump int;
+  #endif
+
+  #define FRAG_CLAMP 1
+
+  vec2 outfrag;
+
+  uniform vec2 wh_rcp;
+  uniform sampler2D tex;
+
+  uniform float dA  ;
+  uniform float dB  ;
+  uniform float feed;
+  uniform float kill;
+  uniform float dt  ;
+
+  void main () {
+
+    vec2 posn = gl_FragCoord.xy * wh_rcp;
+    vec2 val = texture2D(tex, posn).rg;  
+    vec2 lap = -val;
+    
+    lap += texture2D(tex, posn + vec2(-1, 0) * wh_rcp).rg * 0.20;
+    lap += texture2D(tex, posn + vec2(+1, 0) * wh_rcp).rg * 0.20;
+    lap += texture2D(tex, posn + vec2( 0,-1) * wh_rcp).rg * 0.20;
+    lap += texture2D(tex, posn + vec2( 0,+1) * wh_rcp).rg * 0.20;
+    lap += texture2D(tex, posn + vec2(-1,-1) * wh_rcp).rg * 0.05;
+    lap += texture2D(tex, posn + vec2(+1,-1) * wh_rcp).rg * 0.05;
+    lap += texture2D(tex, posn + vec2(-1,+1) * wh_rcp).rg * 0.05;
+    lap += texture2D(tex, posn + vec2(+1,+1) * wh_rcp).rg * 0.05;
+    
+    float nA = dA * lap.r - val.r * val.g * val.g + feed * (1.0 - val.r);
+    float nB = dB * lap.g + val.r * val.g * val.g - (feed + kill) * val.g;
+    
+    outfrag = val + vec2(nA, nB) * dt;
+    
+  #if FRAG_CLAMP
+    outfrag = clamp(outfrag, vec2(0.0), vec2(1.0));
+  #endif
+
+    gl_FragColor = vec4(outfrag, 0.0, 1.0);
+  }
+</script>
+
+
+
+
+<script id="webgl2.fs_display" type="x-shader/x-fragment">
+  #version 300 es
+
+  #ifdef GL_ES
+    precision highp float;
+    precision mediump int;
+  #endif
+
+  out vec4 outfrag;
+
+  uniform vec2 wh_rcp;
+  uniform sampler2D tex;
+  
+  #define STEPS 7
+  uniform vec3 PALLETTE[STEPS]; 
+  
+  vec3 getShading(float val){
+    val = clamp(val, 0.0, 0.99999);
+    float lum_steps = val * float(STEPS-1);
+    float frac = fract(lum_steps);
+    int id = int(floor(lum_steps));
+    return mix(PALLETTE[id], PALLETTE[id+1], frac);
+  }
+  
+  void main () {
+    vec2 val = texture(tex, gl_FragCoord.xy * wh_rcp).rg;   
+    outfrag = vec4(getShading(val.r*val.r), 1.0);
+  }
+</script>
+
+
+<script id="webgl1.fs_display" type="x-shader/x-fragment">
+  #version 100
+
+  #ifdef GL_ES
+    precision mediump float;
+    precision mediump int;
+  #endif
+
+  uniform vec2 wh_rcp;
+  uniform sampler2D tex;
+  
+  #define STEPS 7
+  // arrays in webgl 1 suck!
+  uniform vec3 PALLETTE[STEPS];
+
+  vec3 getShading(float val){
+    val = clamp(val, 0.0, 0.99999);
+    float lum_steps = val * float(STEPS-1);
+    float frac = fract(lum_steps);
+    int id = int(floor(lum_steps));
+    // array-access in webgl 1 sucks!
+    if(id == 0) return mix(PALLETTE[0], PALLETTE[1], frac);
+    if(id == 1) return mix(PALLETTE[1], PALLETTE[2], frac);
+    if(id == 2) return mix(PALLETTE[2], PALLETTE[3], frac);
+    if(id == 3) return mix(PALLETTE[3], PALLETTE[4], frac);
+    if(id == 4) return mix(PALLETTE[4], PALLETTE[5], frac);
+    if(id == 5) return mix(PALLETTE[5], PALLETTE[6], frac);
+    return PALLETTE[6];
+  }
+  
+  void main () {
+    vec2 val = texture2D(tex, gl_FragCoord.xy * wh_rcp).rg;
+    gl_FragColor = vec4(getShading(val.r*val.r), 1.0);
+  }
+</script>
+
+
+
+
+
+
+
+</head>
+<body oncontextmenu="return false;">
+
+  <div id="hud" class="unselectable">
+    <h4>Reaction Diffusion Demo</h4>
+    A WebGL1/WebGL2 experiment using <a href="https://p5js.org">p5.js</a> and <a href="https://github.com/diwi/p5.EasyCam">dwgl.js</a> <br> 
+    <ul></ul>
+  </div>
+
+  <script src="ReactionDiffusion_Webgl2.js"></script>
+  <script>
+  (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();stats.domElement.style.cssText='position:fixed;left:0;top:0;z-index:10000';document.body.appendChild(stats.domElement);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='http://rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+  </script>
+</body>
+
+</html>
