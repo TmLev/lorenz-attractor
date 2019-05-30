@@ -7,16 +7,19 @@ class LorenzAttractor {
         this.dt = dt;
 
         this.sigma = sigma;
-        this.rho   = rho;
-        this.beta  = beta;
+        this.rho = rho;
+        this.beta = beta;
 
-        this.centerX = 0;
-        this.centerY = 0;
-        this.centerZ = 0;
+        this.centerX = x;
+        this.centerY = y;
+        this.centerZ = z;
 
         this.totalMass = 1;
 
-        this.particles = new Array();
+        this.minVelocity = 10000000;
+        this.maxVelocity = 0;
+
+        this.particles = [];
     }
 
     getCoordinates() {
@@ -43,6 +46,17 @@ class LorenzAttractor {
         return x * y - this.beta * z;
     }
 
+    getVelocity(x, y, z) {
+        let dx = this.getDxDt(x, y, z) * this.dt;
+        let dy = this.getDyDt(x, y, z) * this.dt;
+        let dz = this.getDzDt(x, y, z) * this.dt;
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    getRangeVelocity() {
+        return this.maxVelocity - this.minVelocity;
+    }
+
     update() {
         let x = this.x;
         let y = this.y;
@@ -50,6 +64,9 @@ class LorenzAttractor {
         this.x += this.getDxDt(x, y, z) * this.dt;
         this.y += this.getDyDt(x, y, z) * this.dt;
         this.z += this.getDzDt(x, y, z) * this.dt;
+        this.centerX += this.x;
+        this.centerY += this.y;
+        this.centerZ += this.z;
     }
 
     resetCoordinates(x, y, z) {
@@ -61,7 +78,7 @@ class LorenzAttractor {
     drawPoints(pointsCount, particlesCount) {
         this.totalMass = pointsCount;
 
-        let points = new Array();
+        let points = [];
         this.particles.length = 0;
 
         let particlesStep = pointsCount / particlesCount;
@@ -70,13 +87,14 @@ class LorenzAttractor {
             this.update();
             points.push(new p5.Vector(this.x, this.y, this.z));
 
-            if (i % particlesStep == 0) {
+            let velocity = this.getVelocity(this.x, this.y, this.z);
+            this.minVelocity = Math.min(this.minVelocity, velocity);
+            this.maxVelocity = Math.max(this.maxVelocity, velocity);
+
+
+            if (i % particlesStep === 0) {
                 this.particles.push(new Particle(this.x, this.y, this.z));
             }
-
-            this.centerX += this.x;
-            this.centerY += this.y;
-            this.centerZ += this.z;
         }
 
         this.centerX /= this.totalMass;
@@ -87,15 +105,16 @@ class LorenzAttractor {
     }
 
     drawParticles() {
-        let result = new Array();
+        let result = [];
 
         for (let i = 0; i < this.particles.length; ++i) {
             let p = this.particles[i];
-            p.update(this.getDxDt(p.x, p.y, p.z) * this.dt, this.getDyDt(p.x, p.y, p.z) * this.dt, this.getDzDt(p.x, p.y, p.z) * this.dt);
+            p.update(this.getDxDt(p.x, p.y, p.z) * this.dt,
+                     this.getDyDt(p.x, p.y, p.z) * this.dt,
+                     this.getDzDt(p.x, p.y, p.z) * this.dt);
             result.push(p);
         }
 
         return result;
     }
-
 }
