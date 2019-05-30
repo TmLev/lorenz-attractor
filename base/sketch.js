@@ -18,11 +18,14 @@ let sketchHeader = function (p) {
     p.points = [];
 
     p.canvas = null;
+    let $canvas;
 
     p.setup = function () {
-        p.canvas = p.createCanvas(p.windowWidth, 500, p.WEBGL);
+        p.canvas = p.createCanvas(704, 500, p.WEBGL);
         p.canvas.parent(p.select("#headerCanvas"));
         p.colorMode(p.RGB);
+
+        $canvas = $("#headerCanvas");
 
         p.model = new LorenzAttractor(p.x, p.y, p.z, p.dt, p.sigma, p.rho, p.beta);
 
@@ -43,6 +46,10 @@ let sketchHeader = function (p) {
     };
 
     p.draw = function () {
+        if (window.scrollY > $canvas.offset().top + $canvas[0].getBoundingClientRect().height) {
+            return;
+        }
+
         for (let i = 0; i < p.pointsSpeed; ++i) {
             p.model.update();
             p.point = p.model.getCoordinates();
@@ -209,4 +216,4 @@ let mainSketch = function (p) {
 p5.disableFriendlyErrors = true;
 
 let firstP5 = new p5(sketchHeader);
-let secondP5 = new p5(mainSketch);
+//let secondP5 = new p5(mainSketch);
