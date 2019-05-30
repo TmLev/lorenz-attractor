@@ -21,7 +21,7 @@ let sketchHeader = function (p) {
     let $canvas;
 
     p.setup = function () {
-        p.canvas = p.createCanvas(704, 500, p.WEBGL);
+        p.canvas = p.createCanvas(704, 450, p.WEBGL);
         p.canvas.parent(p.select("#headerCanvas"));
         p.colorMode(p.RGB);
 
