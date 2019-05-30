@@ -1,9 +1,10 @@
 <!doctype html>
 
 <head>
-    <script src="./dist/template.v2.js"></script>
+    <script src="../dist/template.v2.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf8">
+    <title>Парадигма Хаоса</title>
 </head>
 
 <body>
@@ -63,21 +64,37 @@
 
 <d-article>
     <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
-    <h2>Тестируем заголовок</h2>
-    <p>Before diving in: if you haven’t encountered t-SNE before, here’s what you need to know about the math behind it.
-        The goal is to take a set of points in a high-dimensional space and find a faithful representation of those
-        points
-        in a lower-dimensional space, typically the 2D plane. The algorithm is non-linear and adapts to the underlying
-        data,
-        performing different transformations on different regions. Those differences can be a major source of
-        confusion.</p>
+    <h2>
+        Эффект бабочки
+    </h2>
+
+    <p>
+        В 1972 году Эдвард Лоренц собирался выступить на конференции,
+        но в пылу работы не успел отправить тему своей лекции.
+        Организатор, спешивший разослать приглашения, выбрал заголовок за него:
+        "Предсказуемость: может ли взмах крыла бабочки в Бразилии вызвать торнадо в Техасе?"
+    </p>
+
+    <p>
+        Так и зародился термин "эффект бабочки", известный всему миру.
+        Зачастую, математические концепты, требующие чуть более глубокого понимания,
+        воспринимаются общественностью не совсем верно.
+        Идея Лоренца не заключалась в том, что предсказать поведение системы на практике невозможно в силу того,
+        что начальные условия почти всегда известны с <i>определённой</i>, неабсолютной точностью.
+    </p>
+
+    <p>
+        Рассмотрим пару траекторий
+    </p>
+
+
     <p>This is the first paragraph of the article. Test a long&thinsp;&mdash;&thinsp;dash -- here it is.</p>
     <p>Test for owner's possessive. Test for "quoting a passage." And another sentence. Or two. Some flopping fins; for
         diving.</p>
     <aside>Some text in an aside, margin notes, etc...</aside>
     <p>Here's a test of an inline equation
-        <d-math>c = a^2 + b^2</d-math>
-        . Also with configurable katex standards just using inline '$' signs: $$x^2$$ And then there's a block equation:
+        <d-math>c = a^2 + b^2.</d-math>
+        Also with configurable katex standards just using inline '$' signs: $$x^2$$ And then there's a block equation:
     </p>
     <d-math block>
         c = \pm \sqrt{ \sum_{i=0}^{n}{a^{222} + b^2}}
