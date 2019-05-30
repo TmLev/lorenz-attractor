@@ -60,7 +60,7 @@
     }
 </style>
 
-<figure id = "headerCanvas"></figure>
+<figure id="headerCanvas"></figure>
 
 <d-article>
     <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
@@ -83,10 +83,54 @@
         что начальные условия почти всегда известны с <i>определённой</i>, неабсолютной точностью.
     </p>
 
-    <p>
-        Рассмотрим пару траекторий
+    <p style="color: firebrick">
+        ДОПИСАТЬ
     </p>
 
+    <h2>
+        Система Лоренца
+    </h2>
+
+    <p>
+        Лоренц, будучи метеорологом, изучал конвекцию
+        (движение газа вследствие разности температур окружающих объектов) в атмосфере Земли.
+        Подобные динамические системы описываются уравнениями Навье-Стокса, которые не имеют решения в общем виде.
+    </p>
+
+    <p style="color: firebrick">
+        ДОПИСАТЬ
+    </p>
+
+    <p>
+        Сама система имеет следующий вид:
+    </p>
+
+    <d-math block>
+        \begin{cases}
+        \dot{x} = \sigma (y - x), \\
+        \dot{y} = x (\rho - z) - y, \\
+        \dot{z} = xy - \beta z.
+        \end{cases}
+    </d-math>
+
+    <h2>
+        Аттрактор Лоренца
+    </h2>
+
+    <p>
+        Рассмотрим некоторые 
+        Воспользуемся теми же значениями параметров, что и использовал сам Лоренц:
+    </p>
+
+    <d-math block>
+        \begin{cases}
+        \sigma = 10, \\
+        \rho = 28, \\
+        \beta = 8 / 3.
+        \end{cases}
+    </d-math>
+
+    <h1>Остатки Дистилля</h1>
 
     <p>This is the first paragraph of the article. Test a long&thinsp;&mdash;&thinsp;dash -- here it is.</p>
     <p>Test for owner's possessive. Test for "quoting a passage." And another sentence. Or two. Some flopping fins; for
@@ -133,7 +177,7 @@
     <div id="canvas_p5" style="position: relative;"></div>
     <a class="marker" href="#section-2" id="section-2"><span>2</span></a>
     <h2>Displaying code snippets</h2>
-    <figure id = "mainCanvas"></figure>
+    <figure id="mainCanvas"></figure>
     <p>Some inline javascript:
         <d-code language="javascript">var x = 25;</d-code>
         . And here's a javascript code block.
