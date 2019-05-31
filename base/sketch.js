@@ -130,7 +130,7 @@ let sketchHeader1 = function (p) {
     let $canvas;
 
     p.setup = function () {
-        canvas = p.createCanvas(704, 450, p.WEBGL);
+        canvas = p.createCanvas(p.min(window.innerWidth, 704), 450, p.WEBGL);
         canvas.parent(p.select("#headerCanvas"));
         p.colorMode(p.RGB);
 
@@ -224,7 +224,7 @@ let twoClosePoints = function (p) {
     let currentZoom = 0;
 
     p.setup = function () {
-        canvas = p.createCanvas(700, 450, p.WEBGL);
+        canvas = p.createCanvas(p.min(window.innerWidth, 700), 450, p.WEBGL);
         canvas.parent(p.select("#twoClosePointsCompare"));
         p.colorMode(p.RGB);
 
