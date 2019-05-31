@@ -275,4 +275,4 @@ var defaultPlotSketch = function(p) {
 p5.disableFriendlyErrors = false;
 
 let firstP5 = new p5(sketchHeader);
-let secondP5 = new p5(defaultPlotSketch);
+// let secondP5 = new p5(defaultPlotSketch);
