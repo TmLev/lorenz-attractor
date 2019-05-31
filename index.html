@@ -254,7 +254,7 @@
     </ul>
 
     <p>
-        Также мы можем рассмотреть якобиан исходной системы:
+        Исследуем эти точки на устойчивость при помощи якобиана:
         <d-math block>
             \begin{pmatrix}
             \dot{x} \\ \dot{y} \\ \dot{z}
@@ -268,6 +268,32 @@
             \begin{pmatrix}
             x \\ y \\ z
             \end{pmatrix}
+
+            \quad \longrightarrow \quad
+
+            J(x, y, z) =
+            \begin{pmatrix}
+            -\sigma & \sigma & 0 \\
+            \rho - z & -1 & -x \\
+            y & x & -\beta
+            \end{pmatrix}
+        </d-math>
+        Начнём с точки $$E_0 = (0, 0, 0)$$:
+        <d-math block>
+            J(E_0) =
+            \begin{pmatrix}
+            -\sigma & \sigma & 0 \\
+            \rho & -1 & 0 \\
+            0 & 0 & -\beta
+            \end{pmatrix}
+
+            \quad \longrightarrow \quad
+
+            \begin{cases}
+            \lambda_1 = - \beta, \\
+            \lambda_2 = 2^{-1} \, \left( \sqrt{ (\sigma - 1)^2 + 4 \sigma \rho } - \sigma - 1 \right), \\
+            \lambda_3 = 2^{-1} \, \left(-\sqrt{ (\sigma - 1)^2 + 4 \sigma \rho } - \sigma - 1 \right).
+            \end{cases}
         </d-math>
     </p>
 

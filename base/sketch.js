@@ -491,6 +491,6 @@ var defaultPlotSketch = function (p) {
     }
 };
 
-let zeroP5 = new p5(pageFormatter);
+//let zeroP5 = new p5(pageFormatter);
 let firstP5 = new p5(sketchHeader1);
 let secondP5 = new p5(twoClosePoints);
