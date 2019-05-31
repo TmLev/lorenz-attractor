@@ -96,24 +96,15 @@
         </li>
     </ul>
 
-    <p>
-        Идея Лоренца не заключалась в том, что предсказать поведение системы на практике невозможно в силу того,
-        что начальные условия почти всегда известны с <i>определённой</i>, неабсолютной точностью.
-    </p>
-
-    <p style="color: firebrick">
-        ДОПИСАТЬ
-    </p>
-
     <h2>
         Система Лоренца
     </h2>
 
     <p>
-        Лоренц, будучи метеорологом, изучал конвекцию в атмосфере Земли. Более конкретно, его заинтересовала
+        Лоренц, будучи метеорологом, изучал конвекцию в атмосфере Земли.
         Подобные динамические системы описываются уравнениями Навье-Стокса,
         для которых на данный момент неизвестны решения в общем виде.
-        Упростив их в несколько раз, учёный получил следующую систему:
+        Упростив их в значительное число раз, учёный получил следующую систему:
     </p>
     <aside>
         Конвекция - теплообмен, возникающий за счёт движения молекул жидкости или газа.
@@ -237,11 +228,18 @@
         <d-cite key='chaosParadigm'></d-cite>
     </p>
 
+    <p>
+        Ниже представлена модель странного аттрактора, с которой, при желании, можно поэкспериментировать.
+        Для желающих более подробно изучить математическую сторону припасён ещё один раздел сразу после модели.
+    </p>
+
+    <figure id="mainCanvas"></figure>
+
 
 
     <h2>Немного математики</h2>
     <p>
-        Эта система имеет несколько замечательных свойств:
+        Система Лоренца обладает несколькими замечательными свойствами:
     </p>
 
     <ul>
@@ -400,113 +398,34 @@
         </li>
 
         <li> либо $$\sigma - \beta - 1 > 0$$
-            и одновременно $$r \leqslant \tfrac{\sigma (\sigma + \beta + 3)}{\sigma - \beta - 1}$$.
+            и одновременно $$r \leqslant \sigma (\sigma + \beta + 3) (\sigma - \beta - 1)^{-1}$$.
         </li>
 
     </ul>
 
-<!--    <h1>Остатки Дистилля</h1>-->
-<!--    <p>This is the first paragraph of the article. Test a long&thinsp;&mdash;&thinsp;dash &#45;&#45; here it is.</p>-->
-<!--    <p>Test for owner's possessive. Test for "quoting a passage." And another sentence. Or two. Some flopping fins; for-->
-<!--        diving.</p>-->
-<!--    <aside>Some text in an aside, margin notes, etc...</aside>-->
-<!--    <p>Here's a test of an inline equation-->
-<!--        <d-math>c = a^2 + b^2.</d-math>-->
-<!--        Also with configurable katex standards just using inline '$' signs: $$x^2$$ And then there's a block equation:-->
-<!--    </p>-->
-<!--    <d-math block>-->
-<!--        c = \pm \sqrt{ \sum_{i=0}^{n}{a^{222} + b^2}}-->
-<!--    </d-math>-->
-<!--    <p>Math can also be quite involved:</p>-->
-<!--    <d-math block>-->
-<!--        \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}}-->
-<!--        {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }-->
-<!--    </d-math>-->
-<!--    <a class="marker" href="#section-1.1" id="section-1.1"><span>1.1</span></a>-->
-<!--    <h3>Citations</h3>-->
-<!--    <p>-->
-<!--        <d-slider style="width: 200px;"></d-slider>-->
-<!--    </p>-->
-<!--    <p>We can-->
-<!--        <d-cite key="mercier2011humans"></d-cite>-->
-<!--        also cite-->
-<!--        <d-cite key="gregor2015draw,mercier2011humans,openai2018charter"></d-cite>-->
-<!--        external publications.-->
-<!--        <d-cite key="dong2014image,dumoulin2016guide,mordvintsev2015inceptionism"></d-cite>-->
-<!--        . We should also be testing footnotes-->
-<!--        <d-footnote>This will become a hoverable footnote. This will become a hoverable footnote. This will become a-->
-<!--            hoverable footnote. This will become a hoverable footnote. This will become a hoverable footnote. This will-->
-<!--            become-->
-<!--            a hoverable footnote. This will become a hoverable footnote. This will become a hoverable footnote.-->
-<!--        </d-footnote>-->
-<!--        . There are multiple footnotes, and they appear in the appendix-->
-<!--        <d-footnote>Given I have coded them right. Also, here's math in a footnote:-->
-<!--            <d-math>c = \sum_0^i{x}</d-math>-->
-<!--            . Also, a citation. Box-ception-->
-<!--            <d-cite key='gregor2015draw'></d-cite>-->
-<!--            !-->
-<!--        </d-footnote>-->
-<!--        as well.-->
-<!--    </p>-->
-<!--    <div id="canvas_p5" style="position: relative;"></div>-->
-<!--    <a class="marker" href="#section-2" id="section-2"><span>2</span></a>-->
-<!--    <h2>Displaying code snippets</h2>-->
-<!--    <figure id="mainCanvas"></figure>-->
-<!--    <p>Some inline javascript:-->
-<!--        <d-code language="javascript">var x = 25;</d-code>-->
-<!--        . And here's a javascript code block.-->
-<!--    </p>-->
-<!--    <d-code block language="javascript">-->
-<!--        var x = 25;-->
-<!--        function(x){-->
-<!--        return x * x;-->
-<!--        }-->
-<!--    </d-code>-->
-<!--    <p>We also support python.</p>-->
-<!--    <d-code block language="python">-->
-<!--        # Python 3: Fibonacci series up to n-->
-<!--        def fib(n):-->
-<!--        a, b = 0, 1-->
-<!--        while a < n:-->
-<!--        print(a, end=' ')-->
-<!--        a, b = b, a+b-->
-<!--    </d-code>-->
-<!--    <p>And a table</p>-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>First</th>-->
-<!--            <th>Second</th>-->
-<!--            <th>Third</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr>-->
-<!--            <td>23</td>-->
-<!--            <td>654</td>-->
-<!--            <td>23</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>14</td>-->
-<!--            <td>54</td>-->
-<!--            <td>34</td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td>234</td>-->
-<!--            <td>54</td>-->
-<!--            <td>23</td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
+    <h2>
+        Заключение
+    </h2>
 
-<!--    <p>That's it for the example article!</p>-->
+    <p>
+        Несмотря на кажущуюся простоту системы Лоренца, ему удалось изменить взгляды многих математиков и физиков на
+        привычные им вещи и стать основоположником новой ветви теории хаоса.
+        Можно даже усмотреть некую аналогию между учёным с бабочкой и его открытием с торнадо,
+        ведь этот феномен породил огромное количество фильмов и книг, а о последствиях незначительных поступков
+        люди стали задумываться гораздо чаще.
+    </p>
+
+    <p>
+        Порой, в попытках изучить довольно комплексные феномены, можно наткнуться на абсолютно удивительные
+        и поразительные вещи.
+        И это ли не повод попробовать?
+    </p>
+
 
 </d-article>
 
 <d-appendix>
     <d-bibliography src="bibliography.bib"></d-bibliography>
 </d-appendix>
-
-<!--<distill-footer></distill-footer>-->
 
 </body>
