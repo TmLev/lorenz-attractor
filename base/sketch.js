@@ -1,35 +1,39 @@
 let sketchHeader = function (p) {
-    p.model = null;
+    let model = null;
 
-    p.x = 0.01;
-    p.y = 0;
-    p.z = 1;
+    let x = 0.01;
+    let y = 0;
+    let z = 1;
 
-    p.sigma = 10;
-    p.rho = 28;
-    p.beta = 8 / 3;
+    let sigma = 10;
+    let rho = 28;
+    let beta = 8 / 3;
 
-    p.dt = 0.005;
+    let dt = 0.005;
 
-    p.pointsCount = 5000;
-    p.pointsSpeed = 5;
+    let pointsCount = 5000;
+    let pointsSpeed = 5;
 
-    p.easycam = null;
-    p.points = [];
+    let easycam = null;
+    let rotateByX = 0.01;
 
-    p.canvas = null;
+    let points = [];
+    let canvas = null;
     let $canvas;
 
     p.setup = function () {
-        p.canvas = p.createCanvas(704, 450, p.WEBGL);
-        p.canvas.parent(p.select("#headerCanvas"));
+        canvas = p.createCanvas(704, 450, p.WEBGL);
+        canvas.parent(p.select("#headerCanvas"));
         p.colorMode(p.RGB);
 
         $canvas = $("#headerCanvas");
 
-        p.model = new LorenzAttractor(p.x, p.y, p.z, p.dt, p.sigma, p.rho, p.beta);
+        let $temp = $(".nav");
+        $temp[0].innerHTML = "<a href=\" https://github.com/tmlev/ \">GitHub</a>";
 
-        p.easycam = p.createEasyCam(p.RendererGL);
+        model = new LorenzAttractor(x, y, z, dt, sigma, rho, beta);
+
+        easycam = p.createEasyCam(p.RendererGL);
         Dw.EasyCam.prototype.apply = function (n) {
             let o = this.cam;
             n = n || o.renderer,
@@ -37,12 +41,12 @@ let sketchHeader = function (p) {
         };
 
         let center = [0.46691379691537993, 0.4606035903004856, 150.187145922344996];
-        let distance = 311;
+        let distance = 350;
         let rotation = [-0.2480524065198549, -0.1886425467149905, 0.7171889384935938, -0.6233169496259671];
-        p.easycam.setCenter(center, 0);
-        p.easycam.setDistance(distance, 0);
-        p.easycam.setRotation(rotation, 0);
-        p.easycam.removeMouseListeners();
+        easycam.setCenter(center, 0);
+        easycam.setDistance(distance, 0);
+        easycam.setRotation(rotation, 0);
+        easycam.removeMouseListeners();
     };
 
     p.draw = function () {
@@ -50,14 +54,16 @@ let sketchHeader = function (p) {
             return;
         }
 
-        for (let i = 0; i < p.pointsSpeed; ++i) {
-            p.model.update();
-            p.point = p.model.getCoordinates();
-            p.points.push(new p5.Vector(p.point[0], p.point[1], p.point[2]));
+        easycam.rotateY(rotateByX);
+
+        for (let i = 0; i < pointsSpeed; ++i) {
+            model.update();
+            let point = model.getCoordinates();
+            points.push(new p5.Vector(point[0], point[1], point[2]));
         }
 
-        while (p.points.length > p.pointsCount) {
-            p.points.shift();
+        while (points.length > pointsCount) {
+            points.shift();
         }
 
         p.background(255, 255, 255);
@@ -68,20 +74,19 @@ let sketchHeader = function (p) {
         p.stroke(220, 0, 0, 150);
 
         p.beginShape();
-        for (let i = 0; i < p.points.length; ++i) {
-            p.vertex(p.points[i].x, p.points[i].y, p.points[i].z);
+        for (let i = 0; i < points.length; ++i) {
+            p.vertex(points[i].x, points[i].y, points[i].z);
         }
         p.endShape();
-
-    }
+    };
 };
 
 let mainSketch = function (p) {
-    p.x = 0.01;
-    p.y = 0;
-    p.z = 1;
+    let x = 0.01;
+    let y = 0;
+    let z = 1;
 
-    p.dt = 0.005;
+    let dt = 0.005;
 
     p.sigma = 10;
     p.rho = 28;
@@ -109,7 +114,7 @@ let mainSketch = function (p) {
     p.inputBeta = null;
 
     function redrawModel() {
-        p.model.resetCoordinates(p.x, p.y, p.z);
+        p.model.resetCoordinates(x, y, z);
         p.points = p.model.drawPoints(p.pointsCount, p.particlesCount);
         p.center = p.model.getCenterOfMass();
         p.easycam.setCenter(p.center, 0);
@@ -145,7 +150,7 @@ let mainSketch = function (p) {
         p.canvas.parent(p.select("#mainCanvas"));
         p.colorMode(p.RGB);
 
-        p.model = new LorenzAttractor(p.x, p.y, p.z, p.dt, p.sigma, p.rho, p.beta);
+        p.model = new LorenzAttractor(x, y, z, dt, p.sigma, p.rho, p.beta);
         p.points = p.model.drawPoints(p.pointsCount, p.particlesCount);
 
         p.easycam = p.createEasyCam(p.RendererGL);
@@ -210,10 +215,64 @@ let mainSketch = function (p) {
             p.pop();
         }
         p.pop();
+
+        // let points = [];
+        // let seed = 100 * p.random();
+        //
+        // for (let i = 0; i < 100; i++) {
+        //     points[i] = new GPoint(i, 10 * p.noise(0.1 * i + seed));
+        // }
+        //
+        // // Create a new plot and set its position on the screen
+        // let plot = new GPlot(p);
+        // plot.setPos(25, 25);
+        //
+        // // Set the plot title and the axis labels
+        // plot.setPoints(points);
+        // plot.getXAxis().setAxisLabelText("x axis");
+        // plot.getYAxis().setAxisLabelText("y axis");
+        // plot.setTitleText("A very simple example");
+        //
+        // // Draw it!
+        // plot.defaultDraw();
     }
 };
 
-p5.disableFriendlyErrors = true;
+
+var defaultPlotSketch = function(p) {
+    // Initial setup
+    p.setup = function() {
+        // Create the canvas
+        const canvas = p.createCanvas(500, 350);
+        canvas.parent(p.select("#mainCanvas"));
+        p.background(150);
+    };
+
+    p.draw = function() {
+        // Prepare the points for the plot
+        const points = [];
+        const seed = 100 * p.random();
+
+        for (let i = 0; i < 100; i++) {
+            points[i] = new GPoint(i, 10 * p.noise(0.1 * i + seed));
+        }
+
+        // Create a new plot and set its position on the screen
+        const plot = new GPlot(p);
+        plot.setPos(0, 0);
+
+        // Set the plot title and the axis labels
+        plot.setPoints(points);
+        plot.getXAxis().setAxisLabelText("x axis");
+        plot.getYAxis().setAxisLabelText("y axis");
+        plot.setTitleText("A very simple example");
+
+        // Draw it!
+        plot.defaultDraw();
+    }
+};
+
+p5.disableFriendlyErrors = false;
 
 let firstP5 = new p5(sketchHeader);
-//let secondP5 = new p5(mainSketch);
+let secondP5 = new p5(defaultPlotSketch);
