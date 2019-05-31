@@ -5,7 +5,7 @@ let pageFormatter = function (p) {
         p.noCanvas();
 
         let $headerNavigation = $(".nav");
-        $headerNavigation[0].innerHTML = "<a href=\" https://github.com/tmlev/ \">GitHub</a>";
+        $headerNavigation[0].innerHTML = "<a href=\" https://github.com/tmlev/ \">Lev Khoroshansky</a>";
 
         let logo = p.select(".logo");
         logo.html(
@@ -600,7 +600,7 @@ var defaultPlotSketch = function (p) {
     }
 };
 
-//let zeroP5 = new p5(pageFormatter);
+let zeroP5 = new p5(pageFormatter);
 let firstP5 = new p5(sketchHeader1);
 let secondP5 = new p5(twoClosePoints);
 let thirdP5 = new p5(twoFarPoints);
