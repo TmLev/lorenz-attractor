@@ -301,6 +301,115 @@ let twoClosePoints = function (p) {
     };
 };
 
+let twoFarPoints = function (p) {
+    let firstModel = null;
+    let secondModel = null;
+
+    let x = -25;
+    let y = 20;
+    let z = -15;
+
+    let epsilonX = 10;
+    let epsilonY = 20;
+    let epsilonZ = 30;
+
+    let sigma = 10;
+    let rho = 28;
+    let beta = 8 / 3;
+
+    let dt = 0.005;
+
+    let pointsCount = 3000;
+    let pointsSpeed = 5;
+
+    let easycam = null;
+
+    let firstPoints = [];
+    let secondPoints = [];
+    let canvas = null;
+    let $canvas;
+
+    let zoomSlider = null;
+    let currentZoom = 0;
+
+    p.setup = function () {
+        canvas = p.createCanvas(p.min(window.innerWidth, 700), 450, p.WEBGL);
+        canvas.parent(p.select("#twoFarPointsCompare"));
+        p.colorMode(p.RGB);
+
+        $canvas = $("#twoFarPointsCompare");
+
+        zoomSlider = p.createSlider(-200, 300, -200, 0.1);
+        zoomSlider.position(5, 5);
+        zoomSlider.parent(p.select("#twoFarPointsCompare"));
+
+        firstModel = new LorenzAttractor(x, y, z, dt, sigma, rho, beta);
+        secondModel = new LorenzAttractor(x + epsilonX, y + epsilonY, z + epsilonZ, dt, sigma, rho, beta);
+
+        easycam = p.createEasyCam(p.RendererGL);
+        Dw.EasyCam.prototype.apply = function (n) {
+            let o = this.cam;
+            n = n || o.renderer,
+            n && (this.camEYE = this.getPosition(this.camEYE), this.camLAT = this.getCenter(this.camLAT), this.camRUP = this.getUpVector(this.camRUP), n._curCamera.camera(this.camEYE[0], this.camEYE[1], this.camEYE[2], this.camLAT[0], this.camLAT[1], this.camLAT[2], this.camRUP[0], this.camRUP[1], this.camRUP[2]))
+        };
+
+        let center = [0.46691379691537993, 0.4606035903004856, 150.187145922344996];
+        let distance = 350;
+        let rotation = [-0.2480524065198549, -0.1886425467149905, 0.7171889384935938, -0.6233169496259671];
+        easycam.setCenter(center, 0);
+        easycam.setDistance(distance, 0);
+        easycam.setRotation(rotation, 0);
+        easycam.removeMouseListeners();
+    };
+
+    p.draw = function () {
+        if (window.scrollY > $canvas.offset().top + $canvas[0].getBoundingClientRect().height ||
+            window.scrollY + window.innerHeight < $canvas.offset().top) {
+            return;
+        }
+
+        if (currentZoom !== zoomSlider.value()) {
+            easycam.zoom(currentZoom - zoomSlider.value());
+            currentZoom = zoomSlider.value();
+        }
+
+        for (let i = 0; i < pointsSpeed; ++i) {
+            firstModel.update();
+            let point = firstModel.getCoordinates();
+            firstPoints.push(new p5.Vector(point[0], point[1], point[2]));
+
+            secondModel.update();
+            point = secondModel.getCoordinates();
+            secondPoints.push(new p5.Vector(point[0], point[1], point[2]));
+        }
+
+        while (firstPoints.length > pointsCount) {
+            firstPoints.shift();
+            secondPoints.shift();
+        }
+
+        p.background(255, 255, 255);
+        p.scale(6);
+        p.noFill();
+
+        p.strokeWeight(1.5);
+        p.stroke(61, 129, 211, 200);
+
+        p.beginShape();
+        for (let i = 0; i < firstPoints.length; ++i) {
+            p.vertex(firstPoints[i].x, firstPoints[i].y, firstPoints[i].z);
+        }
+        p.endShape();
+
+        p.stroke(255, 102, 1, 200);
+        p.beginShape();
+        for (let i = 0; i < secondPoints.length; ++i) {
+            p.vertex(secondPoints[i].x, secondPoints[i].y, secondPoints[i].z);
+        }
+        p.endShape();
+    };
+};
+
 let mainSketch = function (p) {
     let x = 0.01;
     let y = 0;
@@ -494,3 +603,4 @@ var defaultPlotSketch = function (p) {
 //let zeroP5 = new p5(pageFormatter);
 let firstP5 = new p5(sketchHeader1);
 let secondP5 = new p5(twoClosePoints);
+let thirdP5 = new p5(twoFarPoints);

@@ -21,10 +21,6 @@
         ]
     }
     }
-
-
-
-
     </script>
 </d-front-matter>
 
@@ -64,7 +60,6 @@
 <figure id="headerCanvas"></figure>
 
 <d-article>
-    <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
     <h2>
         Эффект бабочки
     </h2>
@@ -79,8 +74,27 @@
     <p>
         Так и зародился термин "эффект бабочки", известный всему миру.
         Зачастую, математические концепты, требующие чуть более глубокого понимания,
-        воспринимаются общественностью не совсем верно. Лоренц выделил несколько ключевых идей:
+        воспринимаются общественностью не совсем верно.
     </p>
+
+    <p>
+        Лоренц же в своём выступлении выделил несколько ключевых идей:
+    </p>
+
+    <ul>
+        <li>
+            Если взмах крыла бабочки может вызвать торнадо,
+            то точно также на это способны все предыдущие и будущие взмахи,
+            равно как и взмахи остальных миллионов бабочек,
+            не говоря уже об активности бесчисленного населения нашей планеты.
+        </li>
+
+        <li>
+            Если взмах крыла бабочки способен вызывать торнадо,
+            то в равной степени этот же взмах может его предотвратить.
+        </li>
+    </ul>
+
     <p>
         Идея Лоренца не заключалась в том, что предсказать поведение системы на практике невозможно в силу того,
         что начальные условия почти всегда известны с <i>определённой</i>, неабсолютной точностью.
@@ -143,7 +157,7 @@
     </ul>
 
     <h2>
-        Странный Аттрактор Лоренца
+        Хаотическое движение
     </h2>
 
     <p>
@@ -166,6 +180,62 @@
     </ul>
 
     <figure id="twoClosePointsCompare"></figure>
+
+    <p>
+        Довольно интересный результат!
+        По началу, траектории почти неразличимы, потом они отклоняются совсем немного,
+        после чего разница уже становится значительной.
+    </p>
+
+    <p>
+        Попробуем ещё раз, однако теперь возьмём точки на значительном отдалении друг от друга:
+    </p>
+    <ul>
+        <li>
+            $$\color{blue} P_0 = (-25, 20, -15)$$
+        </li>
+
+        <li>
+            $$\color{orangered} P_1 = (-15, 40, 15)$$
+        </li>
+    </ul>
+
+    <figure id="twoFarPointsCompare"></figure>
+
+    <p>
+        Даже несмотря на подобную разницу начальных условий, траектории попадают на фигуру,
+        которую впоследствие не покидают. Очень странно, их будто что-то притягивает...
+    </p>
+
+    <h2>
+        Странный аттрактор Лоренца
+    </h2>
+
+    <p>
+        На самом деле, эта фигура так и называется – странный аттрактор Лоренца.
+    </p>
+
+    <aside>
+        От английского "attract" – притягивать.
+    </aside>
+
+    <p>
+        Формальное математическое определение звучит так: аттрактор – такое подмножество фазового пространства, что
+        все траектории из некоторой окрестности стремятся к этому подмножеству при времени, стремящемся к бесконечности.
+    </p>
+    <p>
+        Слово же "странный" здесь выступает в таком ключе:
+        аттрактор, как множество, не представим в виде кривой или поверхности,
+        он имеет более сложную, фрактальную структуру.
+        Траектории аттрактора не замыкается, а малые отклонения постоянно накапливаются, причём экспоненциально.
+    </p>
+
+    <p>
+        Всё это влечёт за собой хаотическую динамику, так как спрогнозировать траекторию представляется сложной задачей
+        в силу погрешностей вычислений. Подобное явление называют "динамическим хаосом".
+    </p>
+
+
 
     <h2>Немного математики</h2>
     <p>
@@ -232,7 +302,7 @@
             x^2 = \beta z.
             \end{cases}
         </d-math>
-        В предположении, что $$x \neq 0$$ (иначе решением будет $$(0, 0, 0)$$), получим
+        В предположении, что $$x \neq 0$$ (иначе решением будет $$(0, 0, 0)$$) и $$\rho \geqslant 1$$, получим
         <d-math block>
             \begin{cases}
             x = \pm \sqrt{\beta (\rho - 1)}, \\
@@ -240,7 +310,7 @@
             z = \rho - 1.
             \end{cases}
         </d-math>
-        Таким образом мы получили ещё две точки равновесия:
+        Таким образом мы получили ещё две точки равновесия при $$x \neq 0, \rho \geqslant 1$$:
     </p>
 
     <ul>
@@ -295,115 +365,139 @@
             \lambda_3 = 2^{-1} \, \left(-\sqrt{ (\sigma - 1)^2 + 4 \sigma \rho } - \sigma - 1 \right).
             \end{cases}
         </d-math>
+        Подкоренное выражение больше нуля, поэтому все собственные значения являются вещественными.
     </p>
 
+    <ul>
+        <li>
+            при $$\rho < 1$$ корни отрицательные – устойчивый узел,
+        </li>
 
-    <h1>Остатки Дистилля</h1>
+        <li>
+            при $$\rho = 1$$ существует нулевой корень – точка бифуркации,
+        </li>
 
-    <p>This is the first paragraph of the article. Test a long&thinsp;&mdash;&thinsp;dash -- here it is.</p>
-    <p>Test for owner's possessive. Test for "quoting a passage." And another sentence. Or two. Some flopping fins; for
-        diving.</p>
-    <aside>Some text in an aside, margin notes, etc...</aside>
-    <p>Here's a test of an inline equation
-        <d-math>c = a^2 + b^2.</d-math>
-        Also with configurable katex standards just using inline '$' signs: $$x^2$$ And then there's a block equation:
-    </p>
-    <d-math block>
-        c = \pm \sqrt{ \sum_{i=0}^{n}{a^{222} + b^2}}
-    </d-math>
-    <p>Math can also be quite involved:</p>
-    <d-math block>
-        \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}}
-        {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }
-    </d-math>
-    <a class="marker" href="#section-1.1" id="section-1.1"><span>1.1</span></a>
-    <h3>Citations</h3>
+        <li>
+            при $$\rho > 1$$ существует положительный корень – неустойчивое седло.
+        </li>
+    </ul>
+
     <p>
-        <d-slider style="width: 200px;"></d-slider>
+        Для оставшихся двух точек мы не будем подробно углубляться в выкладки, чтобы сохранить простоту восприятия.
+        Оказывается, что они либо одновременно устойчивы, либо одновременно неустойчивы. Асимптотическая устойчивость
+        имеет место при справедливости одного из следующих условий:
     </p>
-    <p>We can
-        <d-cite key="mercier2011humans"></d-cite>
-        also cite
-        <d-cite key="gregor2015draw,mercier2011humans,openai2018charter"></d-cite>
-        external publications.
-        <d-cite key="dong2014image,dumoulin2016guide,mordvintsev2015inceptionism"></d-cite>
-        . We should also be testing footnotes
-        <d-footnote>This will become a hoverable footnote. This will become a hoverable footnote. This will become a
-            hoverable footnote. This will become a hoverable footnote. This will become a hoverable footnote. This will
-            become
-            a hoverable footnote. This will become a hoverable footnote. This will become a hoverable footnote.
-        </d-footnote>
-        . There are multiple footnotes, and they appear in the appendix
-        <d-footnote>Given I have coded them right. Also, here's math in a footnote:
-            <d-math>c = \sum_0^i{x}</d-math>
-            . Also, a citation. Box-ception
-            <d-cite key='gregor2015draw'></d-cite>
-            !
-        </d-footnote>
-        as well.
-    </p>
-    <div id="canvas_p5" style="position: relative;"></div>
-    <a class="marker" href="#section-2" id="section-2"><span>2</span></a>
-    <h2>Displaying code snippets</h2>
-    <figure id="mainCanvas"></figure>
-    <p>Some inline javascript:
-        <d-code language="javascript">var x = 25;</d-code>
-        . And here's a javascript code block.
-    </p>
-    <d-code block language="javascript">
-        var x = 25;
-        function(x){
-        return x * x;
-        }
-    </d-code>
-    <p>We also support python.</p>
-    <d-code block language="python">
-        # Python 3: Fibonacci series up to n
-        def fib(n):
-        a, b = 0, 1
-        while a < n:
-        print(a, end=' ')
-        a, b = b, a+b
-    </d-code>
-    <p>And a table</p>
-    <table>
-        <thead>
-        <tr>
-            <th>First</th>
-            <th>Second</th>
-            <th>Third</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>23</td>
-            <td>654</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>54</td>
-            <td>34</td>
-        </tr>
-        <tr>
-            <td>234</td>
-            <td>54</td>
-            <td>23</td>
-        </tr>
-        </tbody>
-    </table>
 
-    <p>That's it for the example article!</p>
+    <ul>
+        <li>
+            либо $$\sigma - \beta - 1 \leqslant 0$$,
+        </li>
+
+        <li> либо $$\sigma - \beta - 1 > 0$$
+            и одновременно $$r \leqslant \tfrac{\sigma (\sigma + \beta + 3)}{\sigma - \beta - 1}$$.
+        </li>
+
+    </ul>
+
+<!--    <h1>Остатки Дистилля</h1>-->
+<!--    <p>This is the first paragraph of the article. Test a long&thinsp;&mdash;&thinsp;dash &#45;&#45; here it is.</p>-->
+<!--    <p>Test for owner's possessive. Test for "quoting a passage." And another sentence. Or two. Some flopping fins; for-->
+<!--        diving.</p>-->
+<!--    <aside>Some text in an aside, margin notes, etc...</aside>-->
+<!--    <p>Here's a test of an inline equation-->
+<!--        <d-math>c = a^2 + b^2.</d-math>-->
+<!--        Also with configurable katex standards just using inline '$' signs: $$x^2$$ And then there's a block equation:-->
+<!--    </p>-->
+<!--    <d-math block>-->
+<!--        c = \pm \sqrt{ \sum_{i=0}^{n}{a^{222} + b^2}}-->
+<!--    </d-math>-->
+<!--    <p>Math can also be quite involved:</p>-->
+<!--    <d-math block>-->
+<!--        \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}}-->
+<!--        {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }-->
+<!--    </d-math>-->
+<!--    <a class="marker" href="#section-1.1" id="section-1.1"><span>1.1</span></a>-->
+<!--    <h3>Citations</h3>-->
+<!--    <p>-->
+<!--        <d-slider style="width: 200px;"></d-slider>-->
+<!--    </p>-->
+<!--    <p>We can-->
+<!--        <d-cite key="mercier2011humans"></d-cite>-->
+<!--        also cite-->
+<!--        <d-cite key="gregor2015draw,mercier2011humans,openai2018charter"></d-cite>-->
+<!--        external publications.-->
+<!--        <d-cite key="dong2014image,dumoulin2016guide,mordvintsev2015inceptionism"></d-cite>-->
+<!--        . We should also be testing footnotes-->
+<!--        <d-footnote>This will become a hoverable footnote. This will become a hoverable footnote. This will become a-->
+<!--            hoverable footnote. This will become a hoverable footnote. This will become a hoverable footnote. This will-->
+<!--            become-->
+<!--            a hoverable footnote. This will become a hoverable footnote. This will become a hoverable footnote.-->
+<!--        </d-footnote>-->
+<!--        . There are multiple footnotes, and they appear in the appendix-->
+<!--        <d-footnote>Given I have coded them right. Also, here's math in a footnote:-->
+<!--            <d-math>c = \sum_0^i{x}</d-math>-->
+<!--            . Also, a citation. Box-ception-->
+<!--            <d-cite key='gregor2015draw'></d-cite>-->
+<!--            !-->
+<!--        </d-footnote>-->
+<!--        as well.-->
+<!--    </p>-->
+<!--    <div id="canvas_p5" style="position: relative;"></div>-->
+<!--    <a class="marker" href="#section-2" id="section-2"><span>2</span></a>-->
+<!--    <h2>Displaying code snippets</h2>-->
+<!--    <figure id="mainCanvas"></figure>-->
+<!--    <p>Some inline javascript:-->
+<!--        <d-code language="javascript">var x = 25;</d-code>-->
+<!--        . And here's a javascript code block.-->
+<!--    </p>-->
+<!--    <d-code block language="javascript">-->
+<!--        var x = 25;-->
+<!--        function(x){-->
+<!--        return x * x;-->
+<!--        }-->
+<!--    </d-code>-->
+<!--    <p>We also support python.</p>-->
+<!--    <d-code block language="python">-->
+<!--        # Python 3: Fibonacci series up to n-->
+<!--        def fib(n):-->
+<!--        a, b = 0, 1-->
+<!--        while a < n:-->
+<!--        print(a, end=' ')-->
+<!--        a, b = b, a+b-->
+<!--    </d-code>-->
+<!--    <p>And a table</p>-->
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>First</th>-->
+<!--            <th>Second</th>-->
+<!--            <th>Third</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <td>23</td>-->
+<!--            <td>654</td>-->
+<!--            <td>23</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>14</td>-->
+<!--            <td>54</td>-->
+<!--            <td>34</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>234</td>-->
+<!--            <td>54</td>-->
+<!--            <td>23</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+<!--    <p>That's it for the example article!</p>-->
 
 </d-article>
 
 <d-appendix>
-
-    <h3>Contributions</h3>
-    <p>Some text describing who did what.</p>
-    <h3>Reviewers</h3>
-    <p>Some text with links describing who reviewed the article.</p>
-
     <d-bibliography src="bibliography.bib"></d-bibliography>
 </d-appendix>
 
