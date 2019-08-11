@@ -9,7 +9,6 @@ let pageFormatter = function (p) {
 
         let logo = p.select(".logo");
         logo.html(
-            '<svg id="svgLogo" viewBox="0 0 64 64"> </svg>' +
             'HSE FCS AMI'
         );
 
@@ -219,13 +218,13 @@ let twoFarPoints = function (p) {
     let firstModel = null;
     let secondModel = null;
 
-    let x = -25;
-    let y = 20;
-    let z = -15;
+    let x = 6 * Math.sqrt(2);
+    let y = 6 * Math.sqrt(2);
+    let z = 27;
 
-    let epsilonX = 10;
-    let epsilonY = 20;
-    let epsilonZ = 30;
+    let epsilonX = 0;
+    let epsilonY = 0;
+    let epsilonZ = 0.5;
 
     let sigma = 10;
     let rho = 28;
@@ -325,9 +324,9 @@ let twoFarPoints = function (p) {
 };
 
 let mainSketch = function (p) {
-    let x = 0.01;
-    let y = 0;
-    let z = 1;
+    let x = 6 * Math.sqrt(2);
+    let y = 6 * Math.sqrt(2);
+    let z = 27;
 
     let dt = 0.01;
 
