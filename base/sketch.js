@@ -343,8 +343,6 @@ let mainSketch = function (p) {
     p.canvas = null;
     let $canvas;
 
-    let font = p.loadFont("./fonts/NotoSansHK-Thin.otf");
-
     function redrawModel() {
         p.model.resetCoordinates(x, y, z);
         p.points = p.model.drawPoints(p.pointsCount, p.particlesCount);
