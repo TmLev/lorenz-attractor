@@ -11,15 +11,6 @@ let pageFormatter = function (p) {
         logo.html(
             'HSE FCS AMI'
         );
-
-        // let logoImage = p.createImg("https://i.imgur.com/p3fyPkL.png");
-        // logoImage.removeAttribute("crossorigin");
-        // logoImage.attribute("height", "55");
-        // logoImage.attribute("width", "55");
-        // logoImage.parent(p.select("#svgLogo"));
-
-        // let $referenceBar = $("#references");
-        // $referenceBar[0].innerHTML = "Ссылки";
     };
 };
 
@@ -218,13 +209,13 @@ let twoFarPoints = function (p) {
     let firstModel = null;
     let secondModel = null;
 
-    let x = 6 * Math.sqrt(2);
-    let y = 6 * Math.sqrt(2);
-    let z = 27;
+    let x = -25; 
+    let y = 20; 
+    let z = -15;
 
-    let epsilonX = 0;
-    let epsilonY = 0;
-    let epsilonZ = 0.5;
+    let epsilonX = 10;
+    let epsilonY = 20;
+    let epsilonZ = 30;
 
     let sigma = 10;
     let rho = 28;
@@ -324,9 +315,9 @@ let twoFarPoints = function (p) {
 };
 
 let mainSketch = function (p) {
-    let x = 6 * Math.sqrt(2);
-    let y = 6 * Math.sqrt(2);
-    let z = 27;
+    let x = 0.01; 
+    let y = 0; 
+    let z = 1;
 
     let dt = 0.01;
 
@@ -465,3 +456,4 @@ let firstP5 = new p5(sketchHeader);
 let secondP5 = new p5(twoClosePoints);
 let thirdP5 = new p5(twoFarPoints);
 let fourthP5 = new p5(mainSketch);
+
